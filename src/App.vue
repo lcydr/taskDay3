@@ -80,7 +80,7 @@ export default {
       this.name=""
       this.age=0
     },
-    btnDelete(ind){
+    btnDelete(id){
     //  let index = this.arr.findIndex(obj => obj.index == id);
      this.arr.splice(ind,1)
     },
