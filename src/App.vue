@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div class="wrap"></div>
 </template>
 
 <script>
@@ -7,7 +7,7 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  methods: {},
 };
 </script>
 
