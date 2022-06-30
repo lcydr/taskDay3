@@ -16,7 +16,7 @@
       </select>
     </div>
     <div>
-      <button>添加/修改</button>
+      <button @click.prevent="addFn">添加/修改</button>
     </div>
     <div>
       <table border="1" cellpadding="10" cellspacing="0">
@@ -27,13 +27,14 @@
           <th>性别</th>
           <th>操作</th>
         </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr v-for="item in list" :key="item.id">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.age }}</td>
+          <td>{{ item.sex }}</td>
+          <td>{{ item.operation }}</td>
           <td>
-            <button>删除</button>
+            <button @click.prevent="del(item.id)">删除</button>
             <button>编辑</button>
           </td>
         </tr>
@@ -42,5 +43,38 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      list: [
+        { id: 1, name: '张三', age: '12', sex: '男', operation: '叉车' },
+        { id: 2, name: '李四', age: '21', sex: '男', operation: '垃圾车' },
+      ],
+      name: '',
+      age: 0,
+    };
+  },
+  methods: {
+    addFn() {
+      if (this.name == '' || this.age == 0) alert('Please enter');
+      const id = this.list[this.list.length - 1]
+        ? this.list[this.list.length - 1].id + 1
+        : 100;
+      this.list.push({
+        id,
+        name: this.name,
+        age: this.price,
+      });
+      this.name = '';
+      this.age = 0;
+    },
+    del(id) {
+      const index = this.list.findIndex((ele) => {
+        return id == ele.id;
+      });
+      console.log(index);
+      this.list.splice(index, 1);
+    },
+  },
+};
 </script>
