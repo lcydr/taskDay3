@@ -8,6 +8,7 @@ export default {
     return {};
   },
   methods: {},
+  computed: {},
 };
 </script>
 
