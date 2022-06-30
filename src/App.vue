@@ -2,7 +2,13 @@
   <div class="wrap">
     <div class="nav_left" id="navLeft">
       <div class="nav_content">
-        <span class="active">导航名字</span>
+        <span
+          @click="btn(item.first_id)"
+          v-for="item in arr"
+          :key="item.first_id"
+          :class="{ active: isShue == item.first_id }"
+          >{{ item.first_name }}</span
+        >
       </div>
     </div>
     <div class="down">
@@ -17,94 +23,99 @@ export default {
     return {
       arr: [
         {
-          first_id: "0",
-          first_name: "热门"
+          first_id: '0',
+          first_name: '热门',
         },
         {
-          first_id: "621",
-          first_name: "\u5496\u5561",
+          first_id: '621',
+          first_name: '\u5496\u5561',
         },
         {
-          first_id: "627",
-          first_name: "\u996e\u98df",
+          first_id: '627',
+          first_name: '\u996e\u98df',
         },
         {
-          first_id: "279",
-          first_name: "\u7537\u88c5",
+          first_id: '279',
+          first_name: '\u7537\u88c5',
         },
         {
-          first_id: "294",
-          first_name: "\u5973\u88c5",
+          first_id: '294',
+          first_name: '\u5973\u88c5',
         },
         {
-          first_id: "122",
-          first_name: "\u773c\u955c",
+          first_id: '122',
+          first_name: '\u773c\u955c',
         },
         {
-          first_id: "339",
-          first_name: "\u5185\u8863\u914d\u9970",
+          first_id: '339',
+          first_name: '\u5185\u8863\u914d\u9970',
         },
         {
-          first_id: "391",
-          first_name: "\u6bcd\u5a74",
+          first_id: '391',
+          first_name: '\u6bcd\u5a74',
         },
         {
-          first_id: "35",
-          first_name: "\u978b\u9774",
+          first_id: '35',
+          first_name: '\u978b\u9774',
         },
         {
-          first_id: "39",
-          first_name: "\u8fd0\u52a8",
+          first_id: '39',
+          first_name: '\u8fd0\u52a8',
         },
         {
-          first_id: "153",
-          first_name: "\u7bb1\u5305",
+          first_id: '153',
+          first_name: '\u7bb1\u5305',
         },
         {
-          first_id: "119",
-          first_name: "\u7f8e\u5986\u4e2a\u62a4",
+          first_id: '119',
+          first_name: '\u7f8e\u5986\u4e2a\u62a4',
         },
         {
-          first_id: "355",
-          first_name: "\u5bb6\u7eba",
+          first_id: '355',
+          first_name: '\u5bb6\u7eba',
         },
         {
-          first_id: "51",
-          first_name: "\u9910\u53a8",
+          first_id: '51',
+          first_name: '\u9910\u53a8',
         },
         {
-          first_id: "334",
-          first_name: "\u7535\u5668",
+          first_id: '334',
+          first_name: '\u7535\u5668',
         },
         {
-          first_id: "369",
-          first_name: "\u5bb6\u88c5",
+          first_id: '369',
+          first_name: '\u5bb6\u88c5',
         },
         {
-          first_id: "10",
-          first_name: "\u5bb6\u5177",
+          first_id: '10',
+          first_name: '\u5bb6\u5177',
         },
         {
-          first_id: "223",
-          first_name: "\u6570\u7801",
+          first_id: '223',
+          first_name: '\u6570\u7801',
         },
         {
-          first_id: "429",
-          first_name: "\u6c7d\u914d",
+          first_id: '429',
+          first_name: '\u6c7d\u914d',
         },
         {
-          first_id: "546",
-          first_name: "\u5065\u5eb7\u4fdd\u5065",
+          first_id: '546',
+          first_name: '\u5065\u5eb7\u4fdd\u5065',
         },
         {
-          first_id: "433",
-          first_name: "\u5b9a\u5236",
+          first_id: '433',
+          first_name: '\u5b9a\u5236',
         },
       ],
-    };
+      isShue: '',
+    }
   },
-
-};
+  methods: {
+    btn(id) {
+      this.isShue =id
+    },
+  },
+}
 </script>
 
 <style>
