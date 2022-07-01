@@ -2,21 +2,21 @@
   <div id="app">
     <div>
       <span>姓名:</span>
-      <input type="text" />
+      <input type="text" placeholder="请输入姓名" v-model.trim="name" />
     </div>
     <div>
       <span>年龄:</span>
-      <input type="number" />
+      <input type="number" placeholder="请输入年龄" v-model.trim="age" />
     </div>
     <div>
       <span>性别:</span>
-      <select>
-        <option value="男">男</option>
-        <option value="女">女</option>
+      <select v-model="sex">
+        <option value="1">男</option>
+        <option value="0">女</option>
       </select>
     </div>
     <div>
-      <button @click.prevent="addFn">添加/修改</button>
+      <button @click.prevent="addFn">{{ isEdit ? '修改' : '添加' }}</button>
     </div>
     <div>
       <table border="1" cellpadding="10" cellspacing="0">
@@ -31,11 +31,10 @@
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
           <td>{{ item.age }}</td>
-          <td>{{ item.sex }}</td>
-          <td>{{ item.operation }}</td>
+          <td>{{ { 0: '女', 1: '男' }[item.sex] }}</td>
           <td>
             <button @click.prevent="del(item.id)">删除</button>
-            <button>编辑</button>
+            <button @click="editFn(item)">编辑</button>
           </td>
         </tr>
       </table>
@@ -47,26 +46,49 @@ export default {
   data() {
     return {
       list: [
-        { id: 1, name: '张三', age: '12', sex: '男', operation: '叉车' },
-        { id: 2, name: '李四', age: '21', sex: '男', operation: '垃圾车' },
+        { id: 1, name: '张三', age: '12', sex: '1', operation: '叉车' },
+        { id: 2, name: '李四', age: '21', sex: '1', operation: '垃圾车' },
       ],
       name: '',
-      age: 0,
+      age: '',
+      sex: 0,
+      isEdit: false,
+      currentId: '',
     };
   },
   methods: {
     addFn() {
-      if (this.name == '' || this.age == 0) alert('Please enter');
+      if (this.isEdit) {
+        const index = this.list.findIndex((ele) => ele.id == this.currentId);
+        this.list[index].name = this.name;
+        this.list[index].age = this.age;
+        this.list[index].sex = this.sex;
+        this.currentId = '';
+        this.isEdit = false;
+        this.clearEdit();
+        alert('修改完成');
+        return;
+      }
+      if (this.name == '' || this.age == '') {
+        return alert('Please enter');
+      }
       const id = this.list[this.list.length - 1]
         ? this.list[this.list.length - 1].id + 1
         : 100;
       this.list.push({
         id,
         name: this.name,
-        age: this.price,
+        age: this.age,
+        sex: this.sex,
       });
-      this.name = '';
-      this.age = 0;
+      this.clearEdit();
+    },
+    editFn(data) {
+      this.isEdit = true;
+      this.name = data.name;
+      this.age = data.age;
+      this.sex = data.sex;
+      this.currentId = data.id;
     },
     del(id) {
       const index = this.list.findIndex((ele) => {
@@ -74,6 +96,11 @@ export default {
       });
       console.log(index);
       this.list.splice(index, 1);
+    },
+    clearEdit() {
+      this.name = '';
+      this.age = '';
+      this.sex = 0;
     },
   },
 };
